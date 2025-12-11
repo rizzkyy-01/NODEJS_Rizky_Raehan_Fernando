@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <h4 class="mb-4 fw-bold">Form Edit Data Siswa</h4>
+
+      <% if (typeof errors != 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+          <ul class="mb-0">
+            <% errors.forEach(function(error) { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/siswa?_method=PUT">
+
+        <input type="hidden" name="_id" value="<%= siswa._id %>">
+        <input type="hidden" name="oldNisn" value="<%= siswa.nisn %>">
+         <div class="mb-3">
+          <label class="form-label fw-bold">Nama</label>
+          <input type="text" class="form-control" name="nama" value="<%= siswa.nama %>" required>
+        </div>
+         <div class="mb-3">
+          <label class="form-label fw-bold">Jenis Kelamin</label>
+          <select class="form-control" name="jk" required>
+            <option value="L" <%= siswa.jk=="L"?"selected":"" %>>Laki-laki</option>
+            <option value="P" <%= siswa.jk=="P"?"selected":"" %>>Perempuan</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">NISN</label>
+          <input type="text" class="form-control" value="<%= siswa.nisn %>" readonly>
+          <input type="hidden" name="nisn" value="<%= siswa.nisn %>">
+        </div>
+
+       
+        <div class="mb-3">
+          <label class="form-label fw-bold">NIK</label>
+          <input type="text" class="form-control" value="<%= siswa.nik %>" readonly>
+          <input type="hidden" name="nik" value="<%= siswa.nik %>">
+        </div>
+
+        <div class="mb-3">
+    <label class="form-label fw-bold">No.KK</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        name="nokk"
+        value="<%= siswa.nokk %>"
+        required
+    />
+</div>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Tingkat Saat Ini</label>
+          <select class="form-control" name="tingkat" required>
+            <option value="X" <%= siswa.tingkat=="X"?"selected":"" %>>X</option>
+            <option value="XI" <%= siswa.tingkat=="XI"?"selected":"" %>>XI</option>
+            <option value="XII" <%= siswa.tingkat=="XII"?"selected":"" %>>XII</option>
+          </select>
+        </div>
+       <select class="form-control" name="rombel" required>
+        <option value="PPLG 1" <%= siswa.rombel=="PPLG 1"?"selected":"" %>>PPLG 1</option>
+        <option value="PPLG 2" <%= siswa.rombel=="PPLG 2"?"selected":"" %>>PPLG 2</option>
+        <option value="RPL 1" <%= siswa.rombel=="RPL 1"?"selected":"" %>>RPL 1</option>
+        <option value="RPL 2" <%= siswa.rombel=="RPL 2"?"selected":"" %>>RPL 2</option>
+      </select>
+
+         <div class="mb-3">
+          <label class="form-label fw-bold">Tanggal Masuk</label>
+          <input type="date" class="form-control" name="tgl_masuk"
+          value="<%= new Date(siswa.tgl_masuk).toISOString().split('T')[0] %>" required>
+        </div>
+          <div class="mb-3">
+          <label class="form-label fw-bold">Status Terdaftar</label>
+          <select class="form-control" name="terdaftar" required>
+            <option value="Siswa Baru" <%= siswa.terdaftar=="Siswa Baru"?"selected":"" %>>Siswa Baru</option>
+            <option value="Pindahan" <%= siswa.terdaftar=="Pindahan"?"selected":"" %>>Pindahan</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Tempat Lahir</label>
+          <input type="text" class="form-control" name="ttl" value="<%= siswa.ttl %>" required>
+        </div>
+     
+        <button type="submit" class="btn btn-primary fw-bold">Simpan</button>
+        <a href="/siswa" class="btn btn-secondary ms-2">Kembali</a>
+      </form>
+    </div>
+  </div>
+</div>

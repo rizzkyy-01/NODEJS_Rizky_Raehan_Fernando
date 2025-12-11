@@ -1,0 +1,86 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-10">
+
+  <h2>Daftar Siswa</h2>
+
+  <a href="/siswa/add" class="btn btn-primary mb-3">
+    Tambah Data Siswa
+  </a>
+
+  <!-- pesan  flassh -->
+  <% if (msg && msg.length !== 0) { %>
+    <div class="alert alert-success" role="alert"><%= msg %></div>
+  <% } %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>JK</th>
+        <th>NISN</th>
+        <th>NIK</th>
+        <th>No.KK</th>
+        <th>Tingkat</th>
+        <th>Rombel</th>
+        <th>Tgl Masuk</th>
+        <th>Terdaftar</th>
+        <th>Tempat Lahir</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if (!siswa || siswa.length === 0) { %>
+        <tr>
+          <td colspan="8">
+            <div class="alert alert-danger fw-bold" role="alert">
+              Data siswa masih kosong
+            </div>
+          </td>
+        </tr>
+      <% } else { %>
+        <% siswa.forEach((siswa, i) => { %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= siswa.nama %></td>
+            <td><%= siswa.jk %></td>
+            <td><%= siswa.nisn %></td>
+            <td><%= siswa.nik %></td>
+            <td><%= siswa.nokk %></td>
+            <td><%= siswa.tingkat %></td>
+            <td><%= siswa.rombel %></td>
+            <td><%= siswa.tgl_masuk.toISOString().split('T')[0] %></td>
+            <td><%= siswa.terdaftar %></td>
+            <td><%= siswa.ttl %></td>
+
+ <td>
+  <div class="d-flex align-items-center gap-2">
+    <a href="/siswa/edit/<%= siswa.nisn %>" 
+       class="btn btn-primary btn-sm rounded-pill px-3">
+      Edit
+    </a>
+
+    <form action="/siswa?_method=DELETE" method="POST" class="m-0 p-0">
+      <input type="hidden" name="nisn" value="<%= siswa.nisn %>">
+      <button 
+        onclick="return confirm('Yakin?')"
+        class="btn btn-danger btn-sm rounded-pill px-3">
+        Hapus
+      </button>
+    </form>
+  </div>
+</td>
+
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+
+  </table>
+
+</div>
+
+  </div>
+</div>
